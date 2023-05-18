@@ -17,8 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 conda create -n pparser
 
 mamba install -c conda-forge openai
-mamba install -c conda-forge faiss
-
+pip install langchain
+pip install chromadb
+pip install PyPDF2
 ```
 
 
