@@ -1,9 +1,12 @@
 # PaperParser (Work in progess)
-Parse scientific PDF papers into summaries with an LLM and save as a persistent searchable vector memory.
+Parse scientific PDF papers into summaries with an LLM and save as a persistent searchable vector database.
 Using langchain https://python.langchain.com/en/latest/index.html and the OpenAI API. 
+
+Designing a vector database for scientific papers instead of relying on relational databases is a strategic choice driven by the inherent high dimensionality of scientific papers. Unlike traditional relational databases, which excel at organizing structured data with fixed schemas, scientific papers often contain complex and unstructured information, making it challenging to represent them accurately in a tabular format. By leveraging vector databases, researchers can efficiently handle the multidimensional nature of scientific papers. These databases excel at capturing and processing high-dimensional data, allowing for effective storage, retrieval, and analysis of scientific papers' intricate content, such as textual information, citations, author affiliations, and references. By employing a vector database, researchers can harness the power of specialized algorithms and techniques, such as similarity search, dimensionality reduction, and clustering, to navigate and explore the vast landscape of scientific literature in a more flexible and intuitive manner.
 
 # Goals:
 * Iteratively build upon the database. Right now it bugs and overwrites the previous embeddings of the prior processed paper. 
+* Add paper title, authors and doi as metadata of the vector embeddings. Right now it only outputs doi url links. 
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
 * Provide a PaperParser container for portability. 
 * Implement a user input script rather than a hard coded query.
