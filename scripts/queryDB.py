@@ -27,6 +27,7 @@ qa = RetrievalQA.from_chain_type(llm=OpenAI(temperature=0.1), chain_type="stuff"
                                  chain_type_kwargs=chain_type_kwargs)
 
 query = "What is a popular approach for decoding BCIs? What are some pros and cons of each?"
+print("QUERY: ", query)
 print(qa.run(query))
 
 
