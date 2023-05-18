@@ -87,6 +87,7 @@ for i in range(len(pdf_files_list)):
     texts = text_splitter.split_documents(documents)
     vectordb = Chroma.from_documents(texts, embedding, persist_directory=persist_directory)
 
-
+vectordb.persist()
+vectordb = None
 
 
