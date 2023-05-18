@@ -2,10 +2,12 @@
 Parse scientific PDF papers into summaries with an LLM and save as a persistent searchable vector memory.
 Using langchain https://python.langchain.com/en/latest/index.html and the OpenAI API. 
 
-# Long term goals:
+# Goals:
 * Iteratively build upon the database. Right now it bugs and overwrites the previous embeddings of the prior processed paper. 
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
-
+* Provide a PaperParser container for portability. 
+* Implement a user input script rather than a hard coded query.
+  + Perhaps a LLM agent that can remember the previous query/response as context with which you can ask followup questions. 
 
 # Overview
 1.) Set up the embedding model and vector database:
