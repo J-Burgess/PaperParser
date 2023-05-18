@@ -20,6 +20,7 @@ mamba install -c conda-forge openai
 pip install langchain
 pip install chromadb
 pip install PyPDF2
+pip install tiktoken
 ```
 
 

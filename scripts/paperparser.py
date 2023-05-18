@@ -9,7 +9,8 @@ from langchain.vectorstores import Chroma
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
-
+from langchain.document_loaders import TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Define your embedding model
 embedding = OpenAIEmbeddings()
@@ -17,6 +18,7 @@ embedding = OpenAIEmbeddings()
 persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB"
 vectordb = Chroma(embedding_function=embedding, persist_directory=persist_directory)
 
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 
 #Now need to iteratively mine the pdfs into text and add embeddings into the vectorDB.
 #Need an ID for each paper and optional metadata. Citation/Title?
@@ -27,6 +29,14 @@ def get_pdf_files(directory):
     # Use glob to get a list of PDF files
     pdf_files = glob.glob(file_pattern)
     return pdf_files
+
+def get_txt_files(directory):
+    # Create the file path pattern to match PDF files
+    file_pattern = os.path.join(directory, "*.txt")
+    # Use glob to get a list of PDF files
+    txt_files = glob.glob(file_pattern)
+    return txt_files
+
 
 def extract_text_from_pdf(pdf_path):
     """
@@ -55,12 +65,28 @@ pdf_directory_path = "/home/james/Desktop/Projects/paperparser/Papers"
 
 # Call the function to get the list of PDF files
 pdf_files_list = get_pdf_files(pdf_directory_path)
-
+print(pdf_files_list)
 # Print the list of PDF files
-for pdf_file in pdf_files_list:
+
+#Convert pdfs into text.
+for i in range(len(pdf_files_list)):
     #Parse into text and add to chroma db.
-    text = extract_text_from_pdf(pdf_file)
-    
+    text = extract_text_from_pdf(pdf_files_list[i])
+    #Save text to file
+    with open(f'{pdf_directory_path}/paper{i}.txt', 'w') as file:
+        # Write the text to the file
+        file.write(text)
+
+
+#Now need to split text files into chunks and embed into vectordb.
+txt_files = get_txt_files(pdf_directory_path)
+for i in range(len(pdf_files_list)):
+    loader = TextLoader(txt_files[i])
+    documents = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    texts = text_splitter.split_documents(documents)
+    vectordb = Chroma.from_documents(texts, embedding, persist_directory=persist_directory)
+
 
 
 
