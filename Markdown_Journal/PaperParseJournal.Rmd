@@ -1,0 +1,25 @@
+---
+title: "JB230518_PaperParser_Journal"
+author: "JBurgess"
+date: "2023-05-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# JB230518 Initializing repository of PaperParser
+* A project to summarize a list of given input papers using an LLM and output a searchable vector memory. 
+
+## Installing required packages:
+```{bash, eval=F}
+conda create -n pparser
+
+mamba install -c conda-forge openai
+mamba install -c conda-forge faiss
+
+```
+
+
+
