@@ -1,5 +1,10 @@
 # PaperParser (Work in progess)
-Parse scientific papers into summaries with an LLM into a persistent searchable vector memory.
+Parse scientific PDF papers into summaries with an LLM and save as a persistent searchable vector memory.
+Using langchain https://python.langchain.com/en/latest/index.html and the OpenAI API. 
+
+# Long term goals:
+* Iteratively build upon the database. Right now it bugs and overwrites the previous embeddings of the prior processed paper. 
+* API access to Arxiv/Biorxiv/... to download papers based on query search. 
 
 
 # Overview
