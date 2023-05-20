@@ -11,6 +11,8 @@ from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import DirectoryLoader
+
 
 # Define your embedding model
 embedding = OpenAIEmbeddings()
@@ -80,13 +82,18 @@ for i in range(len(pdf_files_list)):
 
 #Now need to split text files into chunks and embed into vectordb.
 txt_files = get_txt_files(pdf_directory_path)
-for i in range(len(pdf_files_list)):
-    loader = TextLoader(txt_files[i])
-    documents = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-    texts = text_splitter.split_documents(documents)
-    vectordb = Chroma.from_documents(texts, embedding, persist_directory=persist_directory)
 
+loader = DirectoryLoader(pdf_directory_path, glob="**/*.pdf")
+documents = loader.load()
+print(len(documents))
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+texts = text_splitter.split_documents(documents)
+print(texts)
+
+
+
+
+vectordb = Chroma.from_documents(texts, embedding, persist_directory=persist_directory)
 vectordb.persist()
 vectordb = None
 
