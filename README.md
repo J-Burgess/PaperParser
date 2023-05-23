@@ -11,6 +11,13 @@ Using langchain https://python.langchain.com/en/latest/index.html and the OpenAI
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
 * Provide a PaperParser container for portability. 
 * Implement a user input script rather than a hard coded query.
+* Implement an open source locally run LLM for embedding and conversations to save on cost. 
 
+# Example
+* Embedded two papers from bioRxiv:
+  + Darrel et al, Translating deep learning to neuroprosthetic control. DOI: https://doi.org/10.1101/2023.04.21.537581
+  + Sha et al, Deep learning-enhanced single-molecule spectrum imaging. DOI: https://doi.org/10.1101/2023.05.08.539787
+* Cost was around ~$0.15 for embedding and a single query. 
+  + Hopefully with a locally run LLM costs will be much less, need to determine cost/quality benefit.    
 
-![Example of conversational queries and response](https://github.com/J-Burgess/PaperParser/blob/main/Markdown_Journal/figures/screenshotB?raw=true)
+![Example of conversational queries and response](https://github.com/J-Burgess/PaperParser/blob/main/Markdown_Journal/figures/screenshotB.png?raw=true)
