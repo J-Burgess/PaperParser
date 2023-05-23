@@ -1,49 +1,14 @@
 # PaperParser (Work in progess)
-Parse scientific PDF papers into summaries with an LLM and save as a persistent searchable vector database.
+Parse scientific PDF papers into vector embeddings and save as a persistent vector database. The database can be queried with natural language upon which a similarity search is carried out and relevant context returned to a conversational LLM chain which also outputs source context and its response.   
 Using langchain https://python.langchain.com/en/latest/index.html and the OpenAI API. 
 
-Designing a vector database for scientific papers instead of relying on relational databases is a strategic choice driven by the inherent high dimensionality of scientific papers. Unlike traditional relational databases, which excel at organizing structured data with fixed schemas, scientific papers often contain complex and unstructured information, making it challenging to represent them accurately in a tabular format. By leveraging vector databases, researchers can efficiently handle the multidimensional nature of scientific papers. These databases excel at capturing and processing high-dimensional data, allowing for effective storage, retrieval, and analysis of scientific papers' intricate content, such as textual information, citations, author affiliations, and references. By employing a vector database, researchers can harness the power of specialized algorithms and techniques, such as similarity search, dimensionality reduction, and clustering, to navigate and explore the vast landscape of scientific literature in a more flexible and intuitive manner.
+Designing a vector database for scientific papers instead of relying on relational databases is a strategic choice driven by the inherent high dimensionality of scientific papers. Unlike traditional relational databases, which excel at organizing structured data with fixed schemas, scientific papers often contain complex and unstructured information, making it challenging to represent them accurately in a tabular format. Through leveraging vector databases, researchers can efficiently handle the multidimensional nature of scientific papers. These databases excel at capturing and processing high-dimensional data, allowing for effective storage, retrieval, and analysis of scientific papers' intricate content, such as textual information, citations, author affiliations, and references. By utilizing a vector database in conjunction with a Language Learning Model (LLM) chat agent, researchers can dynamically engage with scientific papers, extracting context from this data to conduct natural language inquiries, thereby providing a novel method to unearth relevant sources and answers to their research questions in an intuitive and interactive manner.
 
 # Goals:
-* Iteratively build upon the database. Right now it bugs and overwrites the previous embeddings of the prior processed paper. 
-* Add paper title, authors and doi as metadata of the vector embeddings. Right now it only outputs doi url links. 
+* Add paper title, authors and doi as metadata of the vector embeddings. Right now only outputs source document address of file. 
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
 * Provide a PaperParser container for portability. 
 * Implement a user input script rather than a hard coded query.
-  + Perhaps a LLM agent that can remember the previous query/response as context with which you can ask followup questions. 
 
-# Overview
-1.) Set up the embedding model and vector database:
-    Create an instance of the OpenAIEmbeddings class and assign it to the embedding variable.
-    Specify a directory path (persist_directory) where the vector database (vectordb) will be stored.
-    Create an instance of the Chroma class, passing the embedding model and the persist directory.
 
-2.) Define text splitting configurations:
-    Create an instance of the CharacterTextSplitter class with a specified chunk size and overlap.
-
-3.) Define utility functions:
-    get_pdf_files(directory): Given a directory, it uses the glob module to find PDF files in that directory and returns a list of file paths.
-    get_txt_files(directory): Given a directory, it uses the glob module to find text files (with a .txt extension) in that directory and returns a list of file paths.
-    extract_text_from_pdf(pdf_path): Given a PDF file path, it uses the PyPDF2 library to open the file, read its contents, and extract the text. The extracted text is returned as a string.
-
-4.) Specify the directory containing PDF files:
-    Assign the directory path to the pdf_directory_path variable.
-
-5.) Get the list of PDF files:
-    Call the get_pdf_files function with the pdf_directory_path and store the list of PDF file paths in the pdf_files_list variable.
-    
-
-6.) Convert PDFs to text and add to the vector database:
-    Iterate over the PDF file paths in pdf_files_list.
-    Extract text from each PDF file using the extract_text_from_pdf function.
-    Save the extracted text to a corresponding text file in the pdf_directory_path.
-    The text is then embedded using the embedding model and added to the vectordb using the Chroma.from_documents method.
-
-7.) Persist the vector database:
-    Save the vector database to disk using the persist method of the vectordb object.
-    Set vectordb to None to release the resources.
-
-8.) Query vector database:
-    Using queryDB.py script and modifying the query variable you can search your vector database. 
-   
-![Example of query and response](https://github.com/J-Burgess/PaperParser/blob/main/Markdown_Journal/figures/screenshotA.png?raw=true)
+![Example of conversational queries and response](https://github.com/J-Burgess/PaperParser/blob/main/Markdown_Journal/figures/screenshotB.png?raw=true)
