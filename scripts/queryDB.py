@@ -26,7 +26,7 @@ print("ANSWER: ", result["answer"])
 print("SOURCE: ", result["source_documents"][0])
 
 
-query = "What is the difference between SpecGAN and GAN?"
+query = "What is a problem of BCI decoding?"
 result = qa({"question": query})
 
 print("QUERY: ", query)
