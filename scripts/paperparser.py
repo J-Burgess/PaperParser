@@ -7,10 +7,15 @@ from langchain.llms import OpenAI
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader
-from langchain.embeddings import LlamaCppEmbeddings
+from langchain.embeddings import HuggingFaceInstructEmbeddings
 
-#Testing with my local llama.cpp running model. Quantized to 4 bit to fit in memory.
-embedding = LlamaCppEmbeddings(model_path="/home/james/Desktop/Projects/llama/llama.cpp/models/7B/ggml-model-q4_0.bin")
+model_name = "hkunlp/instructor-large"
+model_kwargs = {'device': 'cuda'}
+embedding = HuggingFaceInstructEmbeddings(
+    model_name=model_name,
+    model_kwargs=model_kwargs,
+)
+
 # Define your embedding model
 #embedding = OpenAIEmbeddings()
 

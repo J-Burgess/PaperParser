@@ -53,3 +53,16 @@ python3 convert.py models/7B/
 ## Conclusions:
 * The 7B quantized model works fine to embed the 2 papers as previously done with OpenAI api. However, the first query doesnt seem to work at all and it picks the source as the wrong paper. 
 * Could be due to less complex models being unable to extract higher complexity patterns (poorer quality embeddings.)
+
+* Lets try with the large InstructorEmbeddings model that can run on cuda gpu. 
+```{bash,eval=F}
+conda activate pparser
+pip install InstructorEmbedding
+pip install -U sentence-transformers
+
+```
+
+## Conclusions: Instructor large local model works fantastic. 
+* cuda accelerated embedding using huggingface intstructor large model completed embedding the 2 papers very fast and was able to retrieve relevant results from the VectorDB. This will be the one I use from now on!
+
+

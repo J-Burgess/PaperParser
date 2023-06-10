@@ -3,16 +3,19 @@ from langchain.vectorstores import Chroma
 from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.embeddings import LlamaCppEmbeddings
-
+from langchain.embeddings import HuggingFaceInstructEmbeddings
 # Define your embedding model
+model_name = "hkunlp/instructor-large"
+model_kwargs = {'device': 'cuda'}
+embedding = HuggingFaceInstructEmbeddings(
+    model_name=model_name,
+    model_kwargs=model_kwargs,
+)
+
 #embedding = OpenAIEmbeddings()
-#Testing with my local llama.cpp running model. Quantized to 4 bit to fit in memory.
-embedding = LlamaCppEmbeddings(model_path="/home/james/Desktop/Projects/llama/llama.cpp/models/7B/ggml-model-q4_0.bin")
 
 # Initialize the vector db
 persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB"
-#"/home/james/Desktop/Projects/paperparser/VectorDB/JB230610_OldCopyDB"
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 #initialize the memory
