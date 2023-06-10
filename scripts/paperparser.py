@@ -7,10 +7,13 @@ from langchain.llms import OpenAI
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import DirectoryLoader
+from langchain.embeddings import LlamaCppEmbeddings
 
-
+#Testing with my local llama.cpp running model. Quantized to 4 bit to fit in memory.
+embedding = LlamaCppEmbeddings(model_path="/home/james/Desktop/Projects/llama/llama.cpp/models/7B/ggml-model-q4_0.bin")
 # Define your embedding model
-embedding = OpenAIEmbeddings()
+#embedding = OpenAIEmbeddings()
+
 # Initialize the vector db persistence location
 persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB"
 # Specify the directory you want to search for PDF files

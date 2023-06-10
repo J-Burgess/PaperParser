@@ -23,5 +23,33 @@ pip install PyPDF2
 pip install tiktoken
 ```
 
+# JB230610 Installing llama.cpp to locally embed papers.
+* As the majority of expense occured to OpenAI embeddings use I would like to explore the feasability of locally embedding documents. Querying should be cheap enough to continue using the OpenAI API. 
+* Langchain supports llama.cpp wrappings:
+  + https://python.langchain.com/en/latest/reference/modules/embeddings.html
+* Cloned the llama.cpp repository:
+  + https://github.com/ggerganov/llama.cpp
 
+```{bash, eval=F}
+conda activate pparser
+pip install llama-cpp-python
+#Moved llama 7B pytorch weights into /models/7B 
 
+#Created an environment to run the model conversion and quantization. 
+conda activate llama
+python3 -m pip install -r requirements.txt #in the root dir of llama.cpp repo
+#Downloaded tokenizer.model and tokenizer_config.json from here.
+https://huggingface.co/chavinlo/gpt4-x-alpaca/tree/main
+
+# convert the 7B model to ggml FP16 format
+python3 convert.py models/7B/
+# quantize the model to 4-bits (using q4_0 method)
+./quantize ./models/7B/ggml-model-f16.bin ./models/7B/ggml-model-q4_0.bin q4_0
+
+# run the inference
+./main -m ./models/7B/ggml-model-q4_0.bin -n 128
+```
+
+## Conclusions:
+* The 7B quantized model works fine to embed the 2 papers as previously done with OpenAI api. However, the first query doesnt seem to work at all and it picks the source as the wrong paper. 
+* Could be due to less complex models being unable to extract higher complexity patterns (poorer quality embeddings.)
