@@ -66,3 +66,8 @@ pip install -U sentence-transformers
 * cuda accelerated embedding using huggingface intstructor large model completed embedding the 2 papers very fast and was able to retrieve relevant results from the VectorDB. This will be the one I use from now on!
 
 
+* Next steps:
+  + Iteratively add to the database rather than load all pdf chunks into memory.
+  + API access to arxiv (already exists) or BioRxiv.
+  
+
