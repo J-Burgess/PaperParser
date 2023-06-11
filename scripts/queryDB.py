@@ -15,7 +15,7 @@ embedding = HuggingFaceInstructEmbeddings(
 #embedding = OpenAIEmbeddings()
 
 # Initialize the vector db
-persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB"
+persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB/TestIterative"
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 #initialize the memory

@@ -1,6 +1,7 @@
 
 import os
 import glob
+import chromadb
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.llms import OpenAI
@@ -15,6 +16,7 @@ embedding = HuggingFaceInstructEmbeddings(
     model_name=model_name,
     model_kwargs=model_kwargs,
 )
+
 
 # Define your embedding model
 #embedding = OpenAIEmbeddings()
@@ -42,5 +44,3 @@ vectordb = Chroma.from_documents(texts, embedding, persist_directory=persist_dir
 vectordb.persist()
 #Clear from memory
 vectordb = None
-
-
