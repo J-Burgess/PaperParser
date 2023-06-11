@@ -24,22 +24,20 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
 qa = ConversationalRetrievalChain.from_llm(OpenAI(temperature=0), vectordb.as_retriever(), memory=memory,
                                            return_source_documents=True)
 
+#Capture user input at terminal to query the database
+def query_loop(qa):
+    while True:
+        query = input("Enter your query (or 'quit' to stop): ")
+        if query.lower() == 'quit':
+            break
+        else:
+            result = qa({"question": query})
+            print("QUERY: ", query)
+            print("ANSWER: ", result["answer"])
+            print("SOURCE: ", result["source_documents"])
 
-#Now I need to query the database with a question and a followup question.
-query = "What can you tell me about single molecule spectrum imaging?"
+query_loop(qa)
 
-result = qa({"question": query})
-print("QUERY: ", query)
-print("ANSWER: ", result["answer"])
-print("SOURCE: ", result["source_documents"][0])
-
-
-query = "What is a problem of BCI decoding?"
-result = qa({"question": query})
-
-print("QUERY: ", query)
-print("ANSWER: ", result["answer"])
-print("SOURCE: ", result["source_documents"][0])
 
 
 

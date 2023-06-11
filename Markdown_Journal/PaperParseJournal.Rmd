@@ -70,4 +70,13 @@ pip install -U sentence-transformers
   + Iteratively add to the database rather than load all pdf chunks into memory.
   + API access to arxiv (already exists) or BioRxiv.
   
+# JB230611 Iteratively adding completed.
+* Iterative adding to the vectordb has been implemented. 
+* Before adding an arxiv API access maybe I can try a program to chat with your database? Local hosted website app or something? 
+
+```{bash, eval=F}
+
+
+```
+
 
