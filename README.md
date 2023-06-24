@@ -10,8 +10,6 @@ Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector
 * Add paper title, authors and doi as metadata of the vector embeddings. Right now only outputs source document address of file. 
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
 * Provide a PaperParser container for portability. 
-* Implement a user input script rather than a hard coded query.
-* Implement an open source locally run LLM for embedding and conversations to save on cost. 
 
 # Example
 * Embedded two papers from bioRxiv:
