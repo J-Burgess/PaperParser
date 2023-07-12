@@ -20,6 +20,8 @@ mamba install -c conda-forge openai
 pip install langchain
 pip install chromadb
 pip install PyPDF2
+pip install unstructured
+
 pip install tiktoken
 ```
 
@@ -74,8 +76,10 @@ pip install -U sentence-transformers
 * Iterative adding to the vectordb has been implemented. 
 * Before adding an arxiv API access maybe I can try a program to chat with your database? Local hosted website app or something? 
 
-```{bash, eval=F}
 
+# JB230713 Containerizing project:
+```{bash, eval=F}
+singularity build --fakeroot ../NeuroVecta.sif NeuroVecta.def
 
 ```
 
