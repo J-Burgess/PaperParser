@@ -35,7 +35,7 @@ for pdf in pdfs:
     document = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     texts = text_splitter.split_documents(document)
-   # print(texts[0].metadata)
+
     #For each of the texts, I need to clean the /n (and special characters potentially? TODO) out of them before embedding.
     print("Cleaning text of ", pdf, "...")
     for i in range(len(texts)):
@@ -43,12 +43,11 @@ for pdf in pdfs:
         strings.append(cleaned_string)
         metadatas.append(texts[i].metadata)
     print("Embedding text of ", pdf, "...")
-  #  print(texts[0].page_content)
     vectordb.add_texts(texts=strings, metadatas=metadatas)
 
 
 vectordb.persist()
-    # Clear from memory
+# Clear from memory
 vectordb = None
 
 
