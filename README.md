@@ -6,6 +6,10 @@ Designing a vector database for scientific papers instead of relying on relation
 
 Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector database https://www.trychroma.com/ and the OpenAI API https://platform.openai.com/docs/introduction. 
 
+# Requirements:
+* NVIDIA Cuda drivers must be installed for your system and a capable GPU to use local embed mode. 
+  + Otherwise an openAI API key will be required to use their embedding service remotely. 
+
 # Goals:
 * Add paper title, authors and doi as metadata of the vector embeddings. Right now only outputs source document address of file. 
 * API access to Arxiv/Biorxiv/... to download papers based on query search. 
@@ -16,7 +20,5 @@ Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector
 * Embedded two papers from bioRxiv:
   + Darrel et al, Translating deep learning to neuroprosthetic control. DOI: https://doi.org/10.1101/2023.04.21.537581
   + Sha et al, Deep learning-enhanced single-molecule spectrum imaging. DOI: https://doi.org/10.1101/2023.05.08.539787
-* Cost was around ~$0.15 for embedding (the majority of cost) and a single query. 
-  + Hopefully with a locally run LLM costs will be much less, need to determine cost/quality benefit.    
 
 ![Example of conversational queries and response](https://github.com/J-Burgess/PaperParser/blob/main/Markdown_Journal/figures/screenshotB.png?raw=true)
