@@ -1,5 +1,6 @@
 import os
 import glob
+import argparse
 import chromadb
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -10,19 +11,34 @@ from langchain.document_loaders import DirectoryLoader
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.document_loaders import UnstructuredFileLoader
 
+# Create the parser
+parser = argparse.ArgumentParser(description='Process some pdf and db paths.')
+
+# Add the arguments
+parser.add_argument('--pdf_path',
+                    type=str,
+                    help='the path to the directory of PDF files',
+                    required=True)
+
+parser.add_argument('--db_path',
+                    type=str,
+                    help='the path to the vector db persistence directory',
+                    required=True)
+
+# Parse the arguments
+args = parser.parse_args()
+
+pdf_directory_path = args.pdf_path
+persist_directory = args.db_path
+
+
 model_name = "hkunlp/instructor-large"
 model_kwargs = {'device': 'cuda'}
 embedding = HuggingFaceInstructEmbeddings(
     model_name=model_name,
     model_kwargs=model_kwargs,
 )
-vectordb = Chroma(persist_directory="/home/james/Desktop/Projects/paperparser/VectorDB/TestIterative", embedding_function=embedding)
-
-# Initialize the vector db persistence location
-persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB/TestIterative"
-# Specify the directory you want to search for PDF files
-pdf_directory_path = "/home/james/Desktop/Projects/paperparser/Papers"
-
+vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 #Get a list of pdfs in the pdf directory
 pdfs = glob.glob(pdf_directory_path + "/**/*.pdf", recursive=True)
 

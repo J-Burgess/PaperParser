@@ -1,9 +1,11 @@
-from langchain.embeddings.openai import OpenAIEmbeddings
+
 from langchain.vectorstores import Chroma
 from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceInstructEmbeddings
+import argparse
+
 # Define your embedding model
 model_name = "hkunlp/instructor-large"
 model_kwargs = {'device': 'cuda'}
@@ -14,8 +16,21 @@ embedding = HuggingFaceInstructEmbeddings(
 
 #embedding = OpenAIEmbeddings()
 
-# Initialize the vector db
-persist_directory = "/home/james/Desktop/Projects/paperparser/VectorDB/TestIterative"
+
+# Create the parser
+parser = argparse.ArgumentParser(description='Process some pdf and db paths.')
+parser.add_argument('--db_path',
+                    type=str,
+                    help='the path to the vector db persistence directory',
+                    required=True)
+
+# Parse the arguments
+args = parser.parse_args()
+
+persist_directory = args.db_path
+
+
+
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 #initialize the memory

@@ -10,6 +10,15 @@ Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector
 * Pip installed and use pip install -r requirements.txt to get all required software packages. 
 * NVIDIA Cuda drivers must be installed for your system and a capable GPU to use local embed mode. 
   + Otherwise an openAI API key will be required to use their embedding service remotely. 
+* Environment variable OPENAI_API_KEY must be set to query the database using OpenAI gpt models.  
+  + export OPENAI_API_KEY="YOUR_KEY"
+
+# Usage:
+* To create a database input directory containing papers and the output db path:
+  + `python NeuroVectaDB.py --pdf_path ../../papers/ --db_path ../../DB`
+* To query database and prompt an interactive chatbox with the specified database created earlier:
+  + `python queryDB.py --db_path ../../DB/' 
+
 
 # Goals:
 * Add paper title, authors and doi as metadata of the vector embeddings. Right now only outputs source document address of file. 
