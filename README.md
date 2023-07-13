@@ -17,7 +17,7 @@ Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector
 * To create a database input directory containing papers and the output db path:
   + `python NeuroVectaDB.py --pdf_path ../../papers/ --db_path ../../DB`
 * To query database and prompt an interactive chatbox with the specified database created earlier:
-  + `python queryDB.py --db_path ../../DB/' 
+  + `python queryDB.py --db_path ../../DB/'` 
 
 
 # Goals:
