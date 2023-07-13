@@ -7,7 +7,7 @@ Designing a vector database for scientific papers instead of relying on relation
 Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector database https://www.trychroma.com/ and the OpenAI API https://platform.openai.com/docs/introduction. 
 
 # Requirements:
-* Pip installed and use pip install -r requirements.txt to get all required software packages. 
+* Operating System running Ubuntu. Developing on Ubuntu 20.04 LTS.  
 * NVIDIA Cuda drivers must be installed for your system and a capable GPU to use local embed mode. 
   + Otherwise an openAI API key will be required to use their embedding service remotely. 
 * Environment variable OPENAI_API_KEY must be set to query the database using OpenAI gpt models.  
