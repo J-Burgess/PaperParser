@@ -14,7 +14,8 @@ Using langchain https://python.langchain.com/en/latest/index.html, Chroma vector
   + export OPENAI_API_KEY="YOUR_KEY"
 
 # Usage:
-* To create a database input directory containing papers and the output db path:
+* `pip install -r requirements.txt`
+* To create a queryable vector database supply arguments of PDF input directory containing papers and the output database path:
   + `python NeuroVectaDB.py --pdf_path ../../papers/ --db_path ../../DB`
 * To query database and prompt an interactive chatbox with the specified database created earlier:
   + `python queryDB.py --db_path ../../DB/'` 
